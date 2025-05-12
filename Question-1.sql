@@ -12,7 +12,7 @@ Each row of this table indicates the name of a student and the class in which th
 /* Write a solution to report all the duplicate emails. Note that it's guaranteed that the email field is not NULL. */
 /* Return the result table in any order. */
 
-Select email from person group by email having count(email);
+Select email from person group by email having count(email) > 1;
 
 /* 596. Classes more than 5 Students */ /* https://leetcode.com/problems/classes-more-than-5-students/description/ */
 /* Table: Courses
