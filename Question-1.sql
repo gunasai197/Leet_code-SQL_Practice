@@ -32,3 +32,21 @@ Write a solution to find all the classes that have at least five students.
 Return the result table in any order. */
 
 select class from Courses group by class having count(class) >= 5;
+
+/*584. Find Customer Referee
+Table: Customer
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| id          | int     |
+| name        | varchar |
+| referee_id  | int     |
++-------------+---------+
+In SQL, id is the primary key column for this table.
+Each row of this table indicates the id of a customer, their name, and the id of the customer who referred them.
+
+Find the names of the customer that are not referred by the customer with id = 2.
+Return the result table in any order.*/
+select name from customer where referred_id is NULL or referred_id not in 2;
+
