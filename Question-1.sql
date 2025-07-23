@@ -95,5 +95,26 @@ select user_id, count(follower_id) followers_count from followers
 group by user_id 
 order by user_id asc;
 
+/*2356. Number of unique subject taught by each teacher
+Table: Teacher
+
++-------------+------+
+| Column Name | Type |
++-------------+------+
+| teacher_id  | int  |
+| subject_id  | int  |
+| dept_id     | int  |
++-------------+------+
+(subject_id, dept_id) is the primary key (combinations of columns with unique values) of this table.
+Each row in this table indicates that the teacher with teacher_id teaches the subject subject_id in the department dept_id.
+ 
+
+Write a solution to calculate the number of unique subjects each teacher teaches in the university.
+
+Return the result table in any order.*/
+
+select teacher_id, count(DISTINCT subject_id) cnt from teacher
+group by teacher_id;
+
 
 
