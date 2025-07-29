@@ -176,6 +176,7 @@ After running your script, the answer shown is the Person table. The driver will
 delete from person where id not in (select min(id) from person group by email);
 
 /* 175. combine two tables
+
 Table: Person
 
 +-------------+---------+
@@ -236,6 +237,58 @@ select p.firstName as FirstName, p.lastName as LastName, A.city as City, A.state
 from person p left join Addrees A
 on p.personId = A.personId;
 
+/* 183. Customers who Never order
+Table: Customers
 
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| id          | int     |
+| name        | varchar |
++-------------+---------+
+id is the primary key (column with unique values) for this table.
+Each row of this table indicates the ID and name of a customer.
+ 
+Table: Orders
 
++-------------+------+
+| Column Name | Type |
++-------------+------+
+| id          | int  |
+| customerId  | int  |
++-------------+------+
+id is the primary key (column with unique values) for this table.
+customerId is a foreign key (reference columns) of the ID from the Customers table.
+Each row of this table indicates the ID of an order and the ID of the customer who ordered it.
+ 
+Write a solution to find all customers who never order anything.
 
+Return the result table in any order. 
+Example 1:
+
+Input: 
+Customers table:
++----+-------+
+| id | name  |
++----+-------+
+| 1  | Joe   |
+| 2  | Henry |
+| 3  | Sam   |
+| 4  | Max   |
++----+-------+
+Orders table:
++----+------------+
+| id | customerId |
++----+------------+
+| 1  | 3          |
+| 2  | 1          |
++----+------------+
+Output: 
++-----------+
+| Customers |
++-----------+
+| Henry     |
+| Max       |
++-----------+*/
+
+select cust.name as Customers from Customers as cust left join Orders as o on cust.id = o.customerId where o.customerId is Null;
