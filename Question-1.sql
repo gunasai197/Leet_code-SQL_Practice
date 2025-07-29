@@ -152,5 +152,29 @@ where prod.product_id = o.product_id and order_date between '2020-02-01' and '20
 group by product_name having sum(unit) >= 100;
 
 
+/*196 delete duplicate emails
+Table: Person
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| id          | int     |
+| email       | varchar |
++-------------+---------+
+id is the primary key (column with unique values) for this table.
+Each row of this table contains an email. The emails will not contain uppercase letters.
+ 
+
+Write a solution to delete all duplicate emails, keeping only one unique email with the smallest id.
+
+For SQL users, please note that you are supposed to write a DELETE statement and not a SELECT one.
+
+For Pandas users, please note that you are supposed to modify Person in place.
+
+After running your script, the answer shown is the Person table. The driver will first compile and run your piece of code and then show the Person table. The final order of the Person table does not matter. */
+
+delete from person where id not in (select min(id) from person group by email);
+
+
 
 
