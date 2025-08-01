@@ -339,3 +339,8 @@ Output:
 +-----------+-------------+ */
 
 select player_id, TO_CHAR (min(event_date),'YYYY-MM-DD') as first_login from Activity group by player_id;
+
+/* 607. sales person https://leetcode.com/problems/sales-person/description/
+*/
+
+select name from salesperson where sales_id not in(select o.sales_id from orders.o join commpany c on o.com_id = c.com_id where c.name= 'RED')
