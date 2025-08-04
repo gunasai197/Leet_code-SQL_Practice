@@ -344,3 +344,35 @@ select player_id, TO_CHAR (min(event_date),'YYYY-MM-DD') as first_login from Act
 */
 
 select name from salesperson where sales_id not in(select o.sales_id from orders.o join commpany c on o.com_id = c.com_id where c.name= 'RED')
+
+/* Table: Visits
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| visit_id    | int     |
+| customer_id | int     |
++-------------+---------+
+visit_id is the column with unique values for this table.
+This table contains information about the customers who visited the mall.
+ 
+
+Table: Transactions
+
++----------------+---------+
+| Column Name    | Type    |
++----------------+---------+
+| transaction_id | int     |
+| visit_id       | int     |
+| amount         | int     |
++----------------+---------+
+transaction_id is column with unique values for this table.
+This table contains information about the transactions made during the visit_id.
+ 
+
+Write a solution to find the IDs of the users who visited without making any transactions and the number of times they made these types of visits.
+
+Return the result table sorted in any order.*/
+select v.customer_id,count(v.visit_id) as count_no_trans from visits v where 
+v.visit_id NOT IN ( SELECT T.visit_id FROM Transactions T
+WHERE T.amount IS NOT NULL) GROUP BY v.customer_id ORDER BY v.customer_id;
