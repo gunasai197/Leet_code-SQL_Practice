@@ -345,7 +345,9 @@ select player_id, TO_CHAR (min(event_date),'YYYY-MM-DD') as first_login from Act
 
 select name from salesperson where sales_id not in(select o.sales_id from orders.o join commpany c on o.com_id = c.com_id where c.name= 'RED')
 
-/* Table: Visits
+/* 
+1581. customer-who-visited-but-did-not-make-any-transactions
+Table: Visits
 
 +-------------+---------+
 | Column Name | Type    |
