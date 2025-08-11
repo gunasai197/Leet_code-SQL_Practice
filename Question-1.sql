@@ -379,7 +379,8 @@ select v.customer_id,count(v.visit_id) as count_no_trans from visits v where
 v.visit_id NOT IN ( SELECT T.visit_id FROM Transactions T
 WHERE T.amount IS NOT NULL) GROUP BY v.customer_id ORDER BY v.customer_id;
 
-/*Table: Employee
+/*577. Employee Bonus
+Table: Employee
 
 +-------------+---------+
 | Column Name | Type    |
@@ -392,7 +393,6 @@ WHERE T.amount IS NOT NULL) GROUP BY v.customer_id ORDER BY v.customer_id;
 empId is the column with unique values for this table.
 Each row of this table indicates the name and the ID of an employee in addition to their salary and the id of their manager.
  
-
 Table: Bonus
 
 +-------------+------+
@@ -405,14 +405,11 @@ empId is the column of unique values for this table.
 empId is a foreign key (reference column) to empId from the Employee table.
 Each row of this table contains the id of an employee and their respective bonus.
  
-
 Write a solution to report the name and bonus amount of each employee with a bonus less than 1000.
 
 Return the result table in any order.
 
 The result format is in the following example.
-
- 
 
 Example 1:
 
@@ -444,4 +441,3 @@ Output:
 
 select emp.name,bon.bonus from employee emp left join bonus bon
 on emp.empid = bon.bonus where bon.bonus < 1000 or bon.bonus is NULL:
- 
