@@ -463,7 +463,7 @@ Write a solution to report the ids and the names of all managers, the number of 
 Return the result table ordered by employee_id.
 
 The result format is in the following example.*/
-select e.employee_id,e.name,count(e1.employee_id) as reports_count
+select e.employee_id,e.name,count(e1.employee_id) as reports_count,
 round(avg(e1.age)) as average_age from Employees e join Employees e1
 on e.employee_id = e1.reports_to group by e.employee_id,e.name
 order by e.employee_id;
