@@ -541,3 +541,49 @@ Employee 1 has three events: two on day 2020-11-28 with a total of (32 - 4) + (2
 Employee 2 has two events: one on day 2020-11-28 with a total of (33 - 3) = 30, and one on day 2020-12-09 with a total of (74 - 47) = 27. */
 select to_char(event_day,'YYYY-MM-DD') day, emp_id, sum(out_time-in_time) total_time
 from employees group by event_date,emp_id;
+
+/* 1378. Replace employee ID with the Unique Identifier
+Write a solution to show the unique ID of each user, If a user does not have a unique ID replace just show null.
+Return the result table in any order.
+The result format is in the following example.
+
+Example 1:
+
+Input: 
+Employees table:           
++----+----------+
+| id | name     |
++----+----------+
+| 1  | Alice    |
+| 7  | Bob      |
+| 11 | Meir     |
+| 90 | Winston  |
+| 3  | Jonathan |
++----+----------+
+EmployeeUNI table:
++----+-----------+
+| id | unique_id |
++----+-----------+
+| 3  | 1         |
+| 11 | 2         |
+| 90 | 3         |
++----+-----------+
+Output: 
++-----------+----------+
+| unique_id | name     |
++-----------+----------+
+| null      | Alice    |
+| null      | Bob      |
+| 2         | Meir     |
+| 3         | Winston  |
+| 1         | Jonathan |
++-----------+----------+
+Explanation: 
+Alice and Bob do not have a unique ID, We will show null instead.
+The unique ID of Meir is 2.
+The unique ID of Winston is 3.
+The unique ID of Jonathan is 1. */
+
+select empUNI.unique_id,emp.name from employees emp left join employeeUNI empUNI 
+on emp.id = empUNI.id;
+
