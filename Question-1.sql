@@ -650,4 +650,34 @@ Cat queries poor_ query_percentage is (1 / 3) * 100 = 33.33 */
 select query_name,round(avg(rating / position)) quality,round(avg(case when rating<3 then 1 else 0 end)*100,2) poor_query_percentage
 from queries group by query_name;
 
+/* 1527. Patients with a condition
+Write a solution to find the patient_id, patient_name, and conditions of the patients who have Type I Diabetes. Type I Diabetes always starts with DIAB1 prefix.
+
+Return the result table in any order.
+
+The result format is in the following example.
+
+Example 1:
+
+Input: 
+Patients table:
++------------+--------------+--------------+
+| patient_id | patient_name | conditions   |
++------------+--------------+--------------+
+| 1          | Daniel       | YFEV COUGH   |
+| 2          | Alice        |              |
+| 3          | Bob          | DIAB100 MYOP |
+| 4          | George       | ACNE DIAB100 |
+| 5          | Alain        | DIAB201      |
++------------+--------------+--------------+
+Output: 
++------------+--------------+--------------+
+| patient_id | patient_name | conditions   |
++------------+--------------+--------------+
+| 3          | Bob          | DIAB100 MYOP |
+| 4          | George       | ACNE DIAB100 | 
++------------+--------------+--------------+
+Explanation: Bob and George both have a condition that starts with DIAB1. */
+select * from Patients where conditions like 'DIAB1%' or conditions like '% DIAB1';
+
 
