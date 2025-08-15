@@ -680,4 +680,29 @@ Output:
 Explanation: Bob and George both have a condition that starts with DIAB1. */
 select * from Patients where conditions like 'DIAB1%' or conditions like '% DIAB1';
 
+/* 610. Triangle Judgement 
+Report for every three line segments whether they can form a triangle.
 
+Return the result table in any order.
+
+The result format is in the following example.
+
+Example 1:
+
+Input: 
+Triangle table:
++----+----+----+
+| x  | y  | z  |
++----+----+----+
+| 13 | 15 | 30 |
+| 10 | 20 | 15 |
++----+----+----+
+Output: 
++----+----+----+----------+
+| x  | y  | z  | triangle |
++----+----+----+----------+
+| 13 | 15 | 30 | No       |
+| 10 | 20 | 15 | Yes      |
++----+----+----+----------+ */
+
+select x,y,z, case when (x + y > z and x + z > y  and y + z > x) then 'Yes' else 'No' end as triangle from Triangle;
