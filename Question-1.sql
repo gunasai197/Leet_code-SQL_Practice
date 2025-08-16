@@ -750,3 +750,50 @@ Charlie's balance is (6000 + 6000 - 4000) = 8000. */
 
 select u.name,SUM(T.amount) balance from Users u inner join Transactions T
 on u.account = T.account group by u.name having sum(T.amount)>10000;
+
+/* Department Highest salary
+Employee table:
++----+-------+--------+--------------+
+| id | name  | salary | departmentId |
++----+-------+--------+--------------+
+| 1  | Joe   | 70000  | 1            |
+| 2  | Jim   | 90000  | 1            |
+| 3  | Henry | 80000  | 2            |
+| 4  | Sam   | 60000  | 2            |
+| 5  | Max   | 90000  | 1            |
++----+-------+--------+--------------+
+Department table:
++----+-------+
+| id | name  |
++----+-------+
+| 1  | IT    |
+| 2  | Sales |
++----+-------+
+Output: 
++------------+----------+--------+
+| Department | Employee | Salary |
++------------+----------+--------+
+| IT         | Jim      | 90000  |
+| Sales      | Henry    | 80000  |
+| IT         | Max      | 90000  |
++------------+----------+--------+
+Explanation: Max and Jim both have the highest salary in the IT department and Henry has the highest salary in the Sales department. */
+
+select D.name as Department, E.name as Employee, E.salary as Salary
+from employee E inner join Department D
+on E.departmentId = D.id
+where E.salary = (
+    select max(E1.salary) 
+    from employee E1
+    where E1.departmentId=E.departmentId
+);
+
+/* An another solve */
+select d.name as Department, e.name as Employee, e.salary as Salary 
+from Employee e
+join Department d on e.departmentId = d.id
+where ( e.departmentId, e.salary) in (
+    select departmentId, MAX(salary) from Employee
+    group by departmentId
+);
+
