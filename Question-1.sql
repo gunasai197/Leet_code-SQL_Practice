@@ -797,3 +797,46 @@ where ( e.departmentId, e.salary) in (
     group by departmentId
 );
 
+/* 586. Customer placing the largest number of orders.
+Write a solution to find the customer_number for the customer who has placed the largest number of orders.
+
+The test cases are generated so that exactly one customer will have placed more orders than any other customer.
+
+The result format is in the following example.
+
+Example 1:
+
+Input: 
+Orders table:
++--------------+-----------------+
+| order_number | customer_number |
++--------------+-----------------+
+| 1            | 1               |
+| 2            | 2               |
+| 3            | 3               |
+| 4            | 3               |
++--------------+-----------------+
+Output: 
++-----------------+
+| customer_number |
++-----------------+
+| 3               |
++-----------------+
+Explanation: 
+The customer with number 3 has two orders, which is greater than either customer 1 or 2 because each of them only has one order. 
+So the result is customer_number 3. */
+select customer_number from (
+    select customer_number,count(*) 
+    from orders group by customer_number
+    order by 2 desc)
+where rownum = 1;
+
+/* Another way */
+
+SELECT CUSTOMER_NUMBER
+FROM (SELECT CUSTOMER_NUMBER, COUNT(ORDER_NUMBER) "COUNT"
+FROM ORDERS
+GROUP BY CUSTOMER_NUMBER)
+WHERE COUNT = (SELECT MAX(COUNT) FROM (SELECT CUSTOMER_NUMBER, COUNT(ORDER_NUMBER) "COUNT"
+FROM ORDERS
+GROUP BY CUSTOMER_NUMBER));
