@@ -873,3 +873,50 @@ We have three movies with odd-numbered IDs: 1, 3, and 5. The movie with ID = 3 i
 select id,movie,description,rating from Cinema 
 where MOD(id,2)=1 and description != 'boring'
 order by rating desc;
+
+/* 1517. Find the user with Valid emails
+
+Write a solution to find the users who have valid emails.
+A valid e-mail has a prefix name and a domain where:
+
+The prefix name is a string that may contain letters (upper or lower case), digits, underscore '_', period '.', and/or dash '-'. The prefix name must start with a letter.
+The domain is '@leetcode.com'.
+Return the result table in any order.
+
+The result format is in the following example.
+
+Example 1:
+
+Input: 
+Users table:
++---------+-----------+-------------------------+
+| user_id | name      | mail                    |
++---------+-----------+-------------------------+
+| 1       | Winston   | winston@leetcode.com    |
+| 2       | Jonathan  | jonathanisgreat         |
+| 3       | Annabelle | bella-@leetcode.com     |
+| 4       | Sally     | sally.come@leetcode.com |
+| 5       | Marwan    | quarz#2020@leetcode.com |
+| 6       | David     | david69@gmail.com       |
+| 7       | Shapiro   | .shapo@leetcode.com     |
++---------+-----------+-------------------------+
+Output: 
++---------+-----------+-------------------------+
+| user_id | name      | mail                    |
++---------+-----------+-------------------------+
+| 1       | Winston   | winston@leetcode.com    |
+| 3       | Annabelle | bella-@leetcode.com     |
+| 4       | Sally     | sally.come@leetcode.com |
++---------+-----------+-------------------------+
+Explanation: 
+The mail of user 2 does not have a domain.
+The mail of user 5 has the # sign which is not allowed.
+The mail of user 6 does not have the leetcode domain.
+The mail of user 7 starts with a period.*/
+
+select *
+from users
+where regexp_like (mail,'^[a-zA-Z][A-Za-z0-9_.-]*@leetcode[.]com$');
+/* another way */
+select * from Users
+where regexp_like(mail,'^[a-zA_Z0-9._-]+@leetcode\.com$') and not regexp_like(mail,'^[0-9._-]');
