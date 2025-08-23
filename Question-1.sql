@@ -920,3 +920,45 @@ where regexp_like (mail,'^[a-zA-Z][A-Za-z0-9_.-]*@leetcode[.]com$');
 /* another way */
 select * from Users
 where regexp_like(mail,'^[a-zA_Z0-9._-]+@leetcode\.com$') and not regexp_like(mail,'^[0-9._-]');
+
+/* 1075. Project Employees 1
+Write an SQL query that reports the average experience years of all the employees for each project, rounded to 2 digits.
+
+Return the result table in any order.
+
+The query result format is in the following example.
+
+Example 1:
+Input: 
+Project table:
++-------------+-------------+
+| project_id  | employee_id |
++-------------+-------------+
+| 1           | 1           |
+| 1           | 2           |
+| 1           | 3           |
+| 2           | 1           |
+| 2           | 4           |
++-------------+-------------+
+Employee table:
++-------------+--------+------------------+
+| employee_id | name   | experience_years |
++-------------+--------+------------------+
+| 1           | Khaled | 3                |
+| 2           | Ali    | 2                |
+| 3           | John   | 1                |
+| 4           | Doe    | 2                |
++-------------+--------+------------------+
+Output: 
++-------------+---------------+
+| project_id  | average_years |
++-------------+---------------+
+| 1           | 2.00          |
+| 2           | 2.50          |
++-------------+---------------+
+Explanation: The average experience years for the first project is (3 + 2 + 1) / 3 = 2.00 and for the second project is (3 + 2) / 2 = 2.50 */
+
+select P.project_id,round(avg(E.experience_years),2) as average_years
+from Project P join Employee E
+on P.employee_id = E.employee_id
+group by project_id;
