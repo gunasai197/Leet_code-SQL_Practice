@@ -1235,3 +1235,30 @@ Output:
 
 select author_id as id from Views
 group by author_id, viewer_id having author_id = viewer_id order by id asc;
+
+/* 1667. Fix Names in a Table
+Write a solution to fix the names so that only the first character is uppercase and the rest are lowercase.
+
+Return the result table ordered by user_id.
+
+The result format is in the following example.
+
+Example 1:
+
+Input: 
+Users table:
++---------+-------+
+| user_id | name  |
++---------+-------+
+| 1       | aLice |
+| 2       | bOB   |
++---------+-------+
+Output: 
++---------+-------+
+| user_id | name  |
++---------+-------+
+| 1       | Alice |
+| 2       | Bob   |
++---------+-------+*/
+
+select user_id, upper(substr(name,1,1)) || lower(substr(name,2)) from Users order by user_id asc;
