@@ -490,7 +490,7 @@ where parmary_flat = 'Y' or primary_flag = 'N' and employee_id not in (
     select employee_id from Employee where primary_flag='Y'
 );
 
-/* Second Highest Salary
+/* 176. Second Highest Salary
 Table: Employee
 
 +-------------+------+
