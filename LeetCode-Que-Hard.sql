@@ -86,3 +86,9 @@ with rank_cte as(
         from department d inner join employee e on e.departmentId = d.id) where ranks <= 3
     )
 select Department,Employee,salary from rank_cte;
+
+--(OR)
+
+select t.Department as Department,t.Employee as Employee,t.salary from (
+    select d.name as Department, e.name as Employee, e.salary as salary,dense_rank() over(partition by d.name order by e.salary desc) ranks
+        from department d inner join employee e on e.departmentId = d.id) t where ranks <= 3;
